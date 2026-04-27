@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Registration - Selenium Practice</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+
+    .container {
+      background: white;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 30px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #555;
+    }
+
+    .text-input {
+      width: 100%;
+      padding: 10px;
+      border: 2px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+
+    .text-input:focus {
+      outline: none;
+      border-color: #4CAF50;
+    }
+
+    .dropdown {
+      width: 100%;
+      padding: 10px;
+      border: 2px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+      background-color: white;
+    }
+
+    .checkbox-group {
+      margin: 15px 0;
+    }
+
+    .checkbox-item {
+      margin: 8px 0;
+    }
+
+    .submit-button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 12px 30px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .submit-button:hover {
+      background-color: #45a049;
+    }
+
+    .error-message {
+      color: #e74c3c;
+      background: #ffeaea;
+      padding: 10px;
+      border-radius: 5px;
+      margin-top: 15px;
+      display: none;
+      border-left: 4px solid #e74c3c;
+    }
+
+    .success-message {
+      color: #27ae60;
+      background: #eafaf1;
+      padding: 15px;
+      border-radius: 5px;
+      margin-top: 15px;
+      display: none;
+      border-left: 4px solid #27ae60;
+    }
+
+    .instructions {
+      background: #fff3cd;
+      padding: 15px;
+      border-radius: 5px;
+      border-left: 4px solid #ffc107;
+      margin-bottom: 20px;
+      font-size: 14px;
+      color: #856404;
+    }
+
+    .required {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>🎯 User Registration Form</h1>
+  <div class="instructions">
+    <strong>🔍 For Selenium Testing:</strong><br>
+    • Name attributes: <code>firstName</code>, <code>lastName</code>, <code>email</code><br>
+    • Class selectors: <code>text-input</code>, <code>dropdown</code>, <code>submit-button</code><br>
+    • Tag selectors: <code>input</code>, <code>select</code>, <code>button</code>
+  </div>
+  <form>
+    <div class="form-group">
+      <label>First Name <span class="required">*</span></label>
+      <input type="text" name="firstName" class="text-input" placeholder="Enter your first name">
+    </div>
+    <div class="form-group">
+      <label>Last Name <span class="required">*</span></label>
+      <input type="text" name="lastName" class="text-input" placeholder="Enter your last name">
+    </div>
+    <div class="form-group">
+      <label>Email Address <span class="required">*</span></label>
+      <input type="email" name="email" class="text-input" placeholder="Enter your email">
+    </div>
+    <div class="form-group">
+      <label>Age Group</label>
+      <select name="ageGroup" class="dropdown">
+        <option value="">-- Select Age Group --</option>
+        <option value="18-25">18-25</option>
+        <option value="26-35">26-35</option>
+        <option value="36-50">36-50</option>
+        <option value="51+">51+</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Interests</label>
+      <div class="checkbox-group">
+        <div class="checkbox-item">
+          <input type="checkbox" name="interests" value="sports" class="interest-checkbox">
+          <label>Sports</label>
+        </div>
+        <div class="checkbox-item">
+          <input type="checkbox" name="interests" value="music" class="interest-checkbox">
+          <label>Music</label>
+        </div>
+        <div class="checkbox-item">
+          <input type="checkbox" name="interests" value="technology" class="interest-checkbox">
+          <label>Technology</label>
+        </div>
+        <div class="checkbox-item">
+          <input type="checkbox" name="interests" value="travel" class="interest-checkbox">
+          <label>Travel</label>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="submit-button">Register User</button>
+  </form>
+
+  <div class="error-message">
+    <span class="error-text">Please fill in all required fields!</span>
+  </div>
+
+  <div class="success-message">
+    <h3>✅ Registration Successful!</h3>
+    <div class="user-summary">
+      <!-- JavaScript will populate this -->
+    </div>
+  </div>
+</div>
+<script>
+  // Get form elements (using different selector methods)
+  const form = document.querySelector('form');
+  const firstNameInput = document.querySelector('input[name="firstName"]');
+  const lastNameInput = document.querySelector('input[name="lastName"]');
+  const emailInput = document.querySelector('input[name="email"]');
+  const ageGroupSelect = document.querySelector('select[name="ageGroup"]');
+  const interestCheckboxes = document.querySelectorAll('input[name="interests"]');
+  const errorMessage = document.querySelector('.error-message');
+  const successMessage = document.querySelector('.success-message');
+  const userSummary = document.querySelector('.user-summary');
+
+  // Handle form submission
+  form.addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevent actual form submission
+
+    // Hide previous messages
+    errorMessage.style.display = 'none';
+    successMessage.style.display = 'none';
+
+    // Get form values
+    const firstName = firstNameInput.value.trim();
+    const lastName = lastNameInput.value.trim();
+    const email = emailInput.value.trim();
+    const ageGroup = ageGroupSelect.value;
+
+    // Get selected interests
+    const selectedInterests = [];
+    interestCheckboxes.forEach(checkbox => {
+      if (checkbox.checked) {
+        selectedInterests.push(checkbox.value);
+      }
+    });
+
+    // Validation
+    if (!firstName || !lastName || !email) {
+      console.log('Validation failed: Required fields missing');
+      errorMessage.style.display = 'block';
+      return;
+    }
+
+    // Email validation (simple)
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      errorMessage.querySelector('.error-text').textContent = 'Please enter a valid email address!';
+      errorMessage.style.display = 'block';
+      return;
+    }
+
+    // Success! Show registration summary
+    console.log('Registration successful!');
+
+    const interestsText = selectedInterests.length > 0
+            ? selectedInterests.join(', ')
+            : 'None selected';
+
+    const ageText = ageGroup || 'Not specified';
+
+    userSummary.innerHTML = `
+                <p><strong>Name:</strong> ${firstName} ${lastName}</p>
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Age Group:</strong> ${ageText}</p>
+                <p><strong>Interests:</strong> ${interestsText}</p>
+                <p><strong>Registration Date:</strong> ${new Date().toLocaleDateString()}</p>
+            `;
+
+    successMessage.style.display = 'block';
+
+    // Change page title for Selenium verification
+    document.title = 'Registration Complete - Selenium Practice';
+
+    // Log for debugging
+    console.log('User registered:', {
+      firstName,
+      lastName,
+      email,
+      ageGroup,
+      interests: selectedInterests
+    });
+  });
+
+  // Add some helpful console logs for debugging
+  console.log('🎯 Registration Form loaded and ready for testing!');
+  console.log('Available selectors:');
+  console.log('- By name: firstName, lastName, email, ageGroup, interests');
+  console.log('- By class: text-input, dropdown, submit-button, interest-checkbox');
+  console.log('- By tag: input, select, button');
+</script>
+</body>
+</html>
