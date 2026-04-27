@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Calculator - Selenium Practice</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 500px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 30px;
+    }
+
+    .input-group {
+      margin: 20px 0;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: bold;
+      color: #555;
+    }
+
+    input[type="number"] {
+      width: 200px;
+      padding: 10px;
+      font-size: 18px;
+      border: 2px solid #ddd;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    input[type="number"]:focus {
+      outline: none;
+      border-color: #4CAF50;
+    }
+
+    .submit-btn {
+      background-color: #4CAF50;
+      color: white;
+      padding: 12px 30px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 20px 0;
+    }
+
+    .submit-btn:hover {
+      background-color: #45a049;
+    }
+
+    .result {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #e8f5e8;
+      border-radius: 5px;
+      border-left: 4px solid #4CAF50;
+    }
+
+    .result h3 {
+      margin: 0 0 10px 0;
+      color: #2e7d32;
+    }
+
+    .result-value {
+      font-size: 24px;
+      font-weight: bold;
+      color: #1b5e20;
+    }
+
+    .instructions {
+      margin-top: 30px;
+      padding: 15px;
+      background-color: #fff3cd;
+      border-radius: 5px;
+      border-left: 4px solid #ffc107;
+      font-size: 14px;
+      color: #856404;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>🧮 Simple Calculator</h1>
+  <p>Enter a number and click submit to add 10 to it!</p>
+
+  <div class="input-group">
+    <label for="numberInput">Enter a Number:</label>
+    <input type="number" id="numberInput" placeholder="Enter number here" value="0">
+  </div>
+
+  <button class="submit-btn" id="submitBtn">Add 10</button>
+
+  <div class="result" id="resultDiv" style="display: none;">
+    <h3>Result:</h3>
+    <div class="result-value" id="resultValue">0</div>
+  </div>
+
+  <div class="instructions">
+    <strong>For Selenium Testing:</strong><br>
+    • Input field ID: <code>numberInput</code><br>
+    • Submit button ID: <code>submitBtn</code><br>
+    • Result display ID: <code>resultValue</code>
+  </div>
+</div>
+
+<script>
+  // Get elements
+  const numberInput = document.getElementById('numberInput');
+  const submitBtn = document.getElementById('submitBtn');
+  const resultDiv = document.getElementById('resultDiv');
+  const resultValue = document.getElementById('resultValue');
+
+  // Add event listener to submit button
+  submitBtn.addEventListener('click', function() {
+    // Get the input value
+    const inputValue = parseInt(numberInput.value) || 0;
+
+    // Add 10 to the input
+    const result = inputValue + 10;
+
+    // Display the result
+    resultValue.textContent = result;
+    resultDiv.style.display = 'block';
+
+    // Log for debugging
+    console.log(`Input: ${inputValue}, Result: ${result}`);
+  });
+
+  // Focus on input when page loads
+  window.addEventListener('load', function() {
+    numberInput.focus();
+  });
+
+  console.log('🎯 Simple Calculator loaded and ready for testing!');
+</script>
+</body>
+</html>
