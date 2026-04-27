@@ -17,29 +17,31 @@ This is a Selenium WebDriver testing project focused on automating browser-based
 ## Building and Running
 
 ### Compile
-Use IntelliJ IDEA or run:
-```bash
-javac -cp lib/*:out/production/SeleniumAgain Tests/TestCalculator_4_22_Selenium.java -d out/production/SeleniumAgain
-```
+Use IntelliJ IDEA: Project → Build → Build Project (or Cmd+B on macOS)
 
-### Run a Specific Test
-From IntelliJ: Right-click the test class → "Run 'ClassName'"
+The build output goes to `out/production/SeleniumAgain/`
 
-From command line (requires IntelliJ to compile first):
-```bash
-java -cp lib/*:out/production/SeleniumAgain:$MAVEN_REPOSITORY/org/junit/jupiter/* TestCalculator_4_22_Selenium
-```
+### Run Tests
+**In IntelliJ:**
+- Right-click a test class (in Tests/ folder) → "Run 'ClassName'"
+- Right-click a specific test method → "Run 'methodName()'"
+- Use Ctrl+Shift+R (macOS: Cmd+Shift+R) to run the last test
 
-### Run a Main Class
-```bash
-java -cp lib/*:out/production/SeleniumAgain FireFoxSeleniumTest
-```
+**Finding tests:** Look in `Tests/` folder for classes annotated with `@Test`. Note: some classes in `src/` are also example test implementations (Main.java style files)
+
+### Run a Main Class (Example Tests)
+Some files in `src/` have main() methods and can be run directly:
+- In IntelliJ: Right-click the file → "Run 'ClassName.main()'"
+- Example: `FireFoxSeleniumTest.java` has a main method that demonstrates basic Selenium usage
 
 ## Dependencies and Setup
 
 ### Selenium & Firefox
 - **Selenium Version**: 3.141.59 (lib/selenium-*.jar files)
-- **Browser**: Firefox - must be installed at `/Applications/Firefox.app/Contents/MacOS/firefox` (macOS) or update the path in code
+- **Browser**: Firefox - currently hardcoded to `/Applications/Firefox.app/Contents/MacOS/firefox` (macOS only)
+  - **For Windows**: Update to `C:\Program Files\Mozilla Firefox\firefox.exe` or your Firefox install path
+  - **For Linux**: Update to `/usr/bin/firefox` or your Firefox install path
+  - Files to update: search for "Applications/Firefox.app" in test files and update paths
 - **WebDriver**: GeckoDriver (`drivers/geckodriver`) - ensure it's executable
   - If missing: download from https://github.com/mozilla/geckodriver/releases
   - Make executable: `chmod +x drivers/geckodriver`
@@ -63,19 +65,26 @@ java -cp lib/*:out/production/SeleniumAgain FireFoxSeleniumTest
 - WebDriver is accessed via `org.openqa.selenium.WebDriver` interface
 
 ### Firefox Configuration
-Tests configure Firefox via `FirefoxOptions` and `FirefoxBinary`:
+Tests configure Firefox via `FirefoxOptions` and `FirefoxBinary`. **Note:** Firefox path is hardcoded and platform-specific:
 ```java
 FirefoxBinary binary = new FirefoxBinary(new File("/Applications/Firefox.app/Contents/MacOS/firefox"));
 FirefoxOptions options = new FirefoxOptions();
 options.setBinary(binary);
 driver = new FirefoxDriver(options);
 ```
+Update the path in your test files to match your OS's Firefox installation before running tests.
 
 ### Common Test Patterns
 - Use `driver.get(URL)` to navigate
 - Use `driver.findElement(By.*)` to locate elements (By.id, By.xpath, By.tagName, etc.)
 - Use `driver.quit()` to close browser (not just driver.close())
 - Sleep/wait for page loads: `Thread.sleep(milliseconds)`
+
+### Testing with Local HTML Files
+The project includes local HTML test pages (simpleCaculator.html, batmanLogin.html, etc.) in the project root. To test against them:
+- Use file:// URLs: `driver.get("file://" + System.getProperty("user.dir") + "/simpleCaculator.html")`
+- Or use an absolute path: `driver.get("file:///Users/ahernandez54/Documents/SeleniumAgain/simpleCaculator.html")`
+- For remote URLs (like the example in TestCalculator_4_22_Selenium.java), use http:// or https:// directly
 
 ## IDE Configuration
 
@@ -86,7 +95,18 @@ Project uses IntelliJ IDEA module configuration (SeleniumAgain.iml):
 
 ## Common Issues
 
-1. **GeckoDriver not found**: Ensure `drivers/geckodriver` is executable and path in code matches system
-2. **Firefox not found**: Update the hardcoded Firefox path in test files to match your installation
-3. **Cannot find HTML test pages**: Local HTML files (simpleCaculator.html, etc.) are in project root; tests using them should use `file://` URLs or set up a local server
-4. **JUnit tests not running**: Ensure JUnit 5 libraries are in classpath (configured in .iml file)
+1. **Firefox not found error**: The Firefox path is hardcoded in test files to `/Applications/Firefox.app/Contents/MacOS/firefox` (macOS). You must update this path in each test file to match your OS:
+   - macOS: `/Applications/Firefox.app/Contents/MacOS/firefox`
+   - Windows: `C:\Program Files\Mozilla Firefox\firefox.exe` (or your install path)
+   - Linux: `/usr/bin/firefox` (or your install path)
+   - Search for "Applications/Firefox.app" in all test files and replace accordingly
+
+2. **GeckoDriver permission denied**: Make executable with `chmod +x drivers/geckodriver`
+
+3. **JUnit tests not running in IntelliJ**: 
+   - Ensure JUnit 5 libraries are configured (they are in SeleniumAgain.iml)
+   - Right-click the test class/method and select "Run"
+   - If that fails, verify Tests/ folder is marked as "Test Sources Root" in Project Structure
+
+4. **Cannot find HTML test pages**: Local HTML files are in project root. Use file:// URLs:
+   - `driver.get("file://" + System.getProperty("user.dir") + "/simpleCaculator.html")`
