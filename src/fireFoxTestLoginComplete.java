@@ -19,7 +19,7 @@ public class fireFoxTestLoginComplete {
                 wait = new WebDriverWait(driver, 10);
 
                 // Step 2: Navigate to the website
-                String url = "http://45.55.136.114/~dlash/softwTest/batmanLogin.html";
+                String url = "file://" + System.getProperty("user.dir") + "/batmanLogin.html";
                 System.out.println("🌐 Navigating to " + url);
                 driver.get(url);
 

@@ -14,7 +14,7 @@ public class FFSeleniumSignUp {
 
         try {
             // Navigate to the registration form
-            String url = "http://45.55.136.114/~dlash/seleniumTest/inputFormSignUp.html";
+            String url = "file://" + System.getProperty("user.dir") + "/inputFormSignUp.html";
             driver.get(url);
             System.out.println("📄 Opened registration form page");
 

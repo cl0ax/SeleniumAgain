@@ -17,7 +17,7 @@ public static void main(String[] args) {
         System.out.println("🦊 Opening Firefox browser...");
         driver = new FirefoxDriver();
         // Step 2: Navigate to a website
-        String url = "http://45.55.136.114/~dlash/softwTest/batmanClassic.html";
+        String url = "file://" + System.getProperty("user.dir") + "/batmanClassic.html";
         System.out.println("🌐 Navigating to" + url);
         driver.get( url );
         // Step 3: Get page information

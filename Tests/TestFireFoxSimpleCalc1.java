@@ -16,7 +16,7 @@ public class TestFireFoxSimpleCalc1 {
 
         try {
             // Go to the web page
-            String url = "http://45.55.136.114/~dlash/seleniumTest/simpleCaculator.html";
+            String url = "file://" + System.getProperty("user.dir") + "/simpleCaculator.html";
             driver.get(url);
             System.out.println("📄 Opened the calculator page");
 
