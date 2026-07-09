@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class SeleniumInClassPractice {
 
     private static WebDriver driver;
-    private static final String PRACTICE_PAGE = "http://45.55.136.114/~dlash/CSC3510/seleniumPractice.html";
+    private static final String PRACTICE_PAGE = "file://" + System.getProperty("user.dir") + "/SimpleHtmlPage.html";
 
     @BeforeAll
     static void setupClass() {

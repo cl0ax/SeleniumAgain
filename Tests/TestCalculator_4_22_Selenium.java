@@ -32,7 +32,7 @@ public class TestCalculator_4_22_Selenium {
     public void TestCalculator() {
         System.out.printf("\n Starting");
         //WebDriver driver = new FirefoxDriver();
-        final String URL = "http://45.55.136.114/~dlash/seleniumTest/simpleCaculator.html";
+        final String URL = "file://" + System.getProperty("user.dir") + "/simpleCaculator.html";
         try {
             driver.get(URL);
             System.out.printf("\n Browser Opened");

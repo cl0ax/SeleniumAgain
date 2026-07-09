@@ -14,7 +14,7 @@ import java.util.List;
 public class TestSignUpForm {
 
     private WebDriver driver;
-    private final String BASE_URL = "http://45.55.136.114/~dlash/seleniumTest/inputFormSignUp.html";
+    private final String BASE_URL = "file://" + System.getProperty("user.dir") + "/inputFormSignUp.html";
 
     @BeforeEach
     public void setUp() {

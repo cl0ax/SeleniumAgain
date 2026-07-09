@@ -9,7 +9,7 @@ public class FireFoxSimpleCalc1 {
         WebDriver driver = new FirefoxDriver();
         try {
             // Go to the web page
-         String url = "http://45.55.136.114/~dlash/seleniumTest/simpleCaculator.html";
+         String url = "file://" + System.getProperty("user.dir") + "/simpleCaculator.html";
             driver.get( url );
             System.out.println("📄 Opened the calculator page:" + url);
             // STEP 1: Get the current value from the text box

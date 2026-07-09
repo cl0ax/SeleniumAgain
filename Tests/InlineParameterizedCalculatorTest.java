@@ -19,7 +19,7 @@ public class InlineParameterizedCalculatorTest {
         driver = new FirefoxDriver();
 
         // Navigate to the calculator page
-        String url = "http://45.55.136.114/~dlash/seleniumTest/simpleCaculator.html";
+        String url = "file://" + System.getProperty("user.dir") + "/simpleCaculator.html";
         driver.get(url);
     }
 
