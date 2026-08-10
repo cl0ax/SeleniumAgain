@@ -1,69 +1,61 @@
 # SeleniumAgain
 
-SeleniumAgain is a Java Selenium WebDriver practice project. It uses Firefox, GeckoDriver, and JUnit 5 to automate browser tests against small HTML pages that live in this repository.
+This is a Java coursework repository containing in-class exercises and assignments for learning Selenium WebDriver and JUnit 5. It is a collection of practice programs, not a production test suite or reusable testing framework.
 
-## What It Tests
+## What it demonstrates
 
-- A simple calculator page (`simpleCaculator.html`)
-- A user registration form (`inputFormSignUp.html`)
-- A Batman-themed login page (`batmanLogin.html`)
-- Basic browser navigation and page checks
+- Opening local HTML pages and `example.com` in Firefox.
+- Locating elements by ID, name, class, tag, and other Selenium selectors.
+- Filling registration and login forms.
+- Selecting dropdown values.
+- Clicking calculator controls and checking displayed results.
+- Writing JUnit 5 tests, parameterized tests, setup methods, and assertions.
 
-The tests demonstrate common Selenium tasks: opening a page, finding elements by name/class/tag, filling inputs, selecting dropdown values, clicking buttons, and asserting page content.
+The included pages cover a calculator, a signup form, a Batman-themed login exercise, and a basic HTML practice page.
 
-## Stack
+## Repository structure
 
-- Java
-- Selenium WebDriver 3.141.59
-- JUnit 5
-- Firefox + GeckoDriver
-- Local HTML/CSS/JavaScript test pages
+- `Tests/`: JUnit 5 test classes and classroom exercises.
+- `src/`: standalone Selenium examples plus two empty introductory Java classes.
+- Root HTML files: local pages used by the exercises.
+- `SeleniumAgain.iml`: IntelliJ module metadata with JUnit 5.8.1 references.
 
-## Setup
+## Requirements and setup limits
 
-Install Firefox and download GeckoDriver:
+The repository has no Maven or Gradle build file and does not vendor Selenium. Its IntelliJ module refers to a project-level library named `lib`, so a clean clone is not immediately runnable until Selenium is configured in the IDE.
 
-```bash
+The exercises also use inconsistent local paths:
+
+- Several classes hard-code `C:\\Resources\\FireFoxDriver\\geckodriver.exe`.
+- Some classes expect `drivers/geckodriver` under the repository.
+- Some classes expect Firefox at `/Applications/Firefox.app/Contents/MacOS/firefox`.
+
+Install Firefox and GeckoDriver, configure Selenium and JUnit in IntelliJ, then update the relevant path before running an individual class. GeckoDriver releases are available at:
+
+```text
 https://github.com/mozilla/geckodriver/releases
 ```
 
-Place the GeckoDriver binary at:
+## Running exercises
 
-```text
-drivers/geckodriver
-```
-
-Make it executable on macOS/Linux:
-
-```bash
-chmod +x drivers/geckodriver
-```
-
-Several test files expect Firefox at the macOS path:
-
-```text
-/Applications/Firefox.app/Contents/MacOS/firefox
-```
-
-If Firefox is installed somewhere else, update the `FirefoxBinary` path in the relevant test file before running it.
-
-## Run
-
-Open the project in IntelliJ IDEA, make sure the `Tests/` folder is marked as a test source root, then run individual test classes from the IDE.
-
-Useful starting points:
+Mark `Tests/` as a test source root in IntelliJ and run individual classes. Useful examples include:
 
 ```text
 Tests/TestCalculator_4_22_Selenium.java
 Tests/TestFireFoxSimpleCalc1.java
 Tests/TestSignUpForm.java
 Tests/InlineParameterizedCalculatorTest.java
+Tests/DotComTest.java
 ```
 
-The tests now load pages from this repository with `file://` URLs instead of relying on an instructor-hosted server.
+Most exercises use repository-local `file://` pages. `DotComTest` and `src/FireFoxSeleniumTest.java` use `example.com`.
 
-## Notes
+## Technologies shown in source
 
-- `simpleCaculator.html` keeps the original misspelling used by the project.
-- `SeleniumInClassPractice.java` now points at `SimpleHtmlPage.html` as a local placeholder because the original remote practice page is not included in the repo.
-- Some classes under `src/` are runnable examples rather than JUnit tests.
+- Java
+- Selenium WebDriver APIs
+- JUnit 5.8.1 metadata
+- Firefox and GeckoDriver
+- Local HTML, CSS, and JavaScript fixtures
+
+No Selenium version can be verified from the checked-in dependency configuration because the `lib` project library is not included.
