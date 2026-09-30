@@ -1,32 +1,18 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
-
-import java.io.File;
 
 public class FireFoxSeleniumTest {
 
     public static void main(String[] args) {
         System.out.println("🚀 Starting Selenium Test with Firefox...");
 
-        String geckoDriver = System.getProperty("user.dir")
-                + File.separator + "drivers"
-                + File.separator + "geckodriver";
-        System.setProperty("webdriver.gecko.driver", geckoDriver);
-
         WebDriver driver = null;
 
         try {
             System.out.println("🦊 Opening Firefox browser...");
-            FirefoxBinary binary = new FirefoxBinary(
-                    new File("/Applications/Firefox.app/Contents/MacOS/firefox")
-            );
-            FirefoxOptions options = new FirefoxOptions();
-            options.setBinary(binary);
-            driver = new FirefoxDriver(options);
+            driver = new FirefoxDriver();
 
             System.out.println("🌐 Navigating to example.com...");
             driver.get("https://example.com");
@@ -48,10 +34,8 @@ public class FireFoxSeleniumTest {
         } catch (Exception e) {
             System.err.println("❌ Error occurred: " + e.getMessage());
             System.err.println("💡 Make sure:");
-            System.err.println("   1. Firefox is installed in /Applications/Firefox.app");
-            System.err.println("   2. GeckoDriver is at: " + geckoDriver);
-            System.err.println("   3. GeckoDriver is executable: chmod +x drivers/geckodriver");
-            System.err.println("   4. Download from: https://github.com/mozilla/geckodriver/releases");
+            System.err.println("   1. Firefox is installed");
+            System.err.println("   2. Selenium Manager can locate or download geckodriver");
         } finally {
             if (driver != null) {
                 System.out.println("🔒 Closing browser...");

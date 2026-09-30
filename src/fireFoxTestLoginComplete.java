@@ -8,7 +8,6 @@ import java.time.Duration;
 public class fireFoxTestLoginComplete {
         public static void main(String[] args) {
             System.out.println("🚀 Starting Selenium Test with Firefox...");
-            System.setProperty("webdriver.gecko.driver", "C:\\Resources\\FireFoxDriver\\geckodriver.exe");
             WebDriver driver = null;
             WebDriverWait wait = null;
 
@@ -16,7 +15,7 @@ public class fireFoxTestLoginComplete {
                 // Step 1: Open Firefox browser
                 System.out.println("🦊 Opening Firefox browser...");
                 driver = new FirefoxDriver();
-                wait = new WebDriverWait(driver, 10);
+                wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
                 // Step 2: Navigate to the website
                 String url = "file://" + System.getProperty("user.dir") + "/batmanLogin.html";
@@ -42,7 +41,7 @@ public class fireFoxTestLoginComplete {
                 e.printStackTrace();
                 System.err.println("💡 Make sure:");
                 System.err.println("   1. Firefox browser is installed");
-                System.err.println("   2. GeckoDriver is at the correct path");
+                System.err.println("   2. Selenium Manager can locate or download geckodriver");
                 System.err.println("   3. The website URL is accessible");
             } finally {
                 // Always close the browser

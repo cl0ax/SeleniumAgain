@@ -19,7 +19,6 @@ public class TestSignUpForm {
     @BeforeEach
     public void setUp() {
         System.out.println("🔧 Setting up browser for test...");
-        System.setProperty("webdriver.gecko.driver", "C:\\Resources\\FireFoxDriver\\geckodriver.exe");
         driver = new FirefoxDriver();
         driver.get(BASE_URL);
     }

@@ -9,7 +9,6 @@ public class FireFoxSeleniumTestBatman {
 public static void main(String[] args) {
     System.out.println("🚀 Starting Selenium Test with Firefox...");
 
-    System.setProperty("webdriver.gecko.driver", "C:\\Resources\\FireFoxDriver\\geckodriver.exe");
     WebDriver driver = null;
 
     try {
@@ -40,8 +39,7 @@ public static void main(String[] args) {
         System.err.println("❌ Error occurred: " + e.getMessage());
         System.err.println("💡 Make sure:");
         System.err.println("   1. Firefox browser is installed");
-        System.err.println("   2. GeckoDriver is at C:\\geckodriver\\geckodriver.exe");
-        System.err.println("   3. Download from: https://github.com/mozilla/geckodriver/releases");
+        System.err.println("   2. Selenium Manager can locate or download geckodriver");
     } finally {
         // Step 7: Always close the browser
         if (driver != null) {

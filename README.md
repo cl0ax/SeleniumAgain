@@ -45,42 +45,21 @@ This repository collects browser automation exercises and local HTML fixtures. I
 
 ## Quick start
 
-Prerequisites on macOS: JDK, Maven, Firefox, and Homebrew. This repository has no checked-in Maven or Gradle build file. Several classes hard-code Windows GeckoDriver paths that must be changed for macOS before running those classes.
-
-The following setup uses Maven to resolve Selenium and JUnit, the standalone JUnit console launcher, and the calculator parameterized test:
+Prerequisites: JDK 17 or newer, Maven, and Firefox. From a terminal, run:
 
 ```bash
 git clone https://github.com/cl0ax/SeleniumAgain.git
 cd SeleniumAgain
-brew install geckodriver
-mkdir -p /tmp/seleniumagain/src /tmp/seleniumagain/classes
-cp Tests/InlineParameterizedCalculatorTest.java /tmp/seleniumagain/src/
-cp simpleCaculator.html /tmp/seleniumagain/
-sed -i '' 's#C:\\\\Resources\\\\FireFoxDriver\\\\geckodriver.exe#/opt/homebrew/bin/geckodriver#' /tmp/seleniumagain/src/InlineParameterizedCalculatorTest.java
+mvn test
 ```
 
-Create `/tmp/seleniumagain/pom.xml` with these dependencies, then resolve the test classpath:
-
-```xml
-<project xmlns="http://maven.apache.org/POM/4.0.0">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>local.demo</groupId><artifactId>seleniumagain</artifactId><version>1.0</version>
-  <dependencies>
-    <dependency><groupId>org.seleniumhq.selenium</groupId><artifactId>selenium-java</artifactId><version>4.25.0</version></dependency>
-    <dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><version>5.11.3</version></dependency>
-  </dependencies>
-</project>
-```
+To keep Firefox headless, prefix Maven with `MOZ_HEADLESS=1`:
 
 ```bash
-mvn -f /tmp/seleniumagain/pom.xml dependency:build-classpath -Dmdep.outputFile=/tmp/seleniumagain/classpath.txt
-curl -fL -o /tmp/seleniumagain/junit-platform-console-standalone-1.11.3.jar https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-console-standalone/1.11.3/junit-platform-console-standalone-1.11.3.jar
-cd /tmp/seleniumagain
-javac -cp "$(cat classpath.txt)" -d classes src/InlineParameterizedCalculatorTest.java
-MOZ_HEADLESS=1 java -jar junit-platform-console-standalone-1.11.3.jar execute --class-path "classes:.:$(cat classpath.txt)" --select-class InlineParameterizedCalculatorTest --details tree
+MOZ_HEADLESS=1 mvn test
 ```
 
-`MOZ_HEADLESS=1` is optional and keeps Firefox from opening a visible window. The test source uses the copied `simpleCaculator.html` fixture from the current working directory.
+Maven resolves Selenium and JUnit from the checked-in `pom.xml`. Selenium Manager locates or downloads geckodriver as needed. Run Maven from the repository root so the tests can open the HTML fixtures there.
 
 ## How it works
 
@@ -88,7 +67,7 @@ MOZ_HEADLESS=1 java -jar junit-platform-console-standalone-1.11.3.jar execute --
 
 ## Project notes
 
-This is CSC3510 coursework and a collection of practice programs, not a production test framework. The repository has no checked-in dependency/build configuration, so Selenium and JUnit versions must be supplied when compiling. Several classes hard-code Windows GeckoDriver paths, and some others expect a repository-local driver or a particular Firefox installation path. Update the relevant path for your machine before running those classes.
+This is CSC3510 coursework and a collection of practice programs, not a production test framework. The default Maven run includes the local calculator tests. I exclude `DotComTest` because it visits `example.com`, and `SeleniumInClassPractice` because its test bodies are unfinished TODO exercises. I also exclude `TestSignUpForm` for now: six invalid-email cases expect a custom error message, but the page's native email validation blocks submission before that message appears. The network example in `src/FireFoxSeleniumTest.java` is a standalone manual example, outside Surefire's test run.
 
 ## License
 

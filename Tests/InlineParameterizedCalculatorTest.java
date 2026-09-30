@@ -15,7 +15,6 @@ public class InlineParameterizedCalculatorTest {
     @BeforeEach
     public void setUp() {
         System.out.println("🔧 Setting up browser for test...");
-        System.setProperty("webdriver.gecko.driver", "C:\\Resources\\FireFoxDriver\\geckodriver.exe");
         driver = new FirefoxDriver();
 
         // Navigate to the calculator page

@@ -11,7 +11,6 @@ public class TestFireFoxSimpleCalc1 {
         System.out.println("🚀 Starting JUnit Test...");
 
         // Set up the driver
-        System.setProperty("webdriver.gecko.driver", "C:\\Resources\\FireFoxDriver\\geckodriver.exe");
         WebDriver driver = new FirefoxDriver();
 
         try {

@@ -5,7 +5,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 public class FireFoxSimpleCalc1 {
     public static void main(String[] args) {
         System.out.println("🚀 Starting Basic Selenium Example...");
-        System.setProperty("webdriver.gecko.driver", "C:\\Resources\\FireFoxDriver\\geckodriver.exe");
         WebDriver driver = new FirefoxDriver();
         try {
             // Go to the web page

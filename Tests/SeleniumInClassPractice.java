@@ -19,12 +19,6 @@ public class SeleniumInClassPractice {
     private static WebDriver driver;
     private static final String PRACTICE_PAGE = "file://" + System.getProperty("user.dir") + "/SimpleHtmlPage.html";
 
-    @BeforeAll
-    static void setupClass() {
-        System.setProperty("webdriver.gecko.driver",
-                System.getProperty("user.dir") + "\\drivers\\geckodriver.exe");
-    }
-
     @BeforeEach
     void setup() {
         driver = new FirefoxDriver();

@@ -9,7 +9,6 @@ public class FFSeleniumSignUp {
         System.out.println("🚀 Starting Registration Form Selenium Demo...");
 
         // Set up the driver
-        System.setProperty("webdriver.gecko.driver", "C:\\Resources\\FireFoxDriver\\geckodriver.exe");
         WebDriver driver = new FirefoxDriver();
 
         try {
